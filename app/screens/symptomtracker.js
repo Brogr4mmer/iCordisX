@@ -9,9 +9,12 @@ StyleSheet
 
 export default class SymptomTracker extends Component {
   render() {
+    const now = new Date(); 
+    const day = now.getDay; 
+    const year = now.getYear; 
     return (
       <View style={styles.container}>
-        <Text style={{padding: 26, fontWeight: 'bold', fontSize: 20}}>
+        <Text style={{padding: 22, fontWeight: 'bold', fontSize: 20}}>
           Daily Symptom Tracker 
           {new Date().toString()}
         </Text>
@@ -86,12 +89,18 @@ const styles = StyleSheet.create({
   symptoms: {
     fontSize: 15,
     fontWeight: '300',
+    fontFamily: 'Avenir-Black',
+    fontWeight: 'bold',
   },
   slider: {
     marginLeft: 10,
     marginRight: 10,
-    marginBottom: 5.5,
+    marginBottom: 2,
     borderBottomWidth: 0.75,
-    backgroundColor: '#b0c4de',
+    backgroundColor: 'lightskyblue',
+    shadowColor: 'ghostwhite',
+    shadowOpacity: 4, 
+    paddingTop: 5,
+    fontFamily: 'Avenir',
   },
 });

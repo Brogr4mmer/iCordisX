@@ -3,10 +3,14 @@ import {
   AppRegistry,
 } from 'react-native';
 import {Root} from './app/index.js'
+import {Toot} from './app/index.js'
 
-class iCordisX extends Component {
+export default class iCordisX extends Component {
   render() {
-    return (
+     return (
+      <Toot />
+   )
+    return(
       <Root />
     )
   }
