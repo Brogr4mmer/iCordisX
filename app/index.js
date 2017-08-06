@@ -4,10 +4,16 @@ import loginscreen from './screens/loginscreen';
 import datadisplay from './screens/datadisplay';
 import { StackNavigator } from 'react-navigation';
 
-export const Root = TabNavigator({
-    SymptomTracker: { screen: symptomtracker },
-    DataDisplay: { screen: datadisplay},
-}); 
+export const Root = TabNavigator(
+    {
+        LoginScreen: { screen: loginscreen },
+        SymptomTracker: { screen: symptomtracker },
+        DataDisplay: { screen: datadisplay},
+    },
+    {
+        initialRouteName: "LoginScreen"
+    }
+); 
 
 export const Toot = StackNavigator({
     LoginScreen: { screen: loginscreen },

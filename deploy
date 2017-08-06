@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+rsync -avzh \
+  --include 'api/***' \
+  --include 'package.json' \
+  --exclude='*' \
+  . class:~/iCordisX
+ssh iCordisX 'bash -s' <<'ENDSSH'
+  source ~/.nvm/nvm.sh
+  cd ~/iCordisX
+  npm install
+  pm2 delete API
+  pm2 start api/index.js --name "API"
+ENDSSH

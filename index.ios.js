@@ -8,11 +8,8 @@ import {Toot} from './app/index.js'
 export default class iCordisX extends Component {
   render() {
      return (
-      <Toot />
-   )
-    return(
       <Root />
-    )
+   )
   }
 }
 
