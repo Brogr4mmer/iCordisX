@@ -1,40 +1,50 @@
-import React, {Component} from 'react'; 
-import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar} from 'react-native'; 
+import React, { Component } from 'react';
+import { StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import { TabNavigator } from 'react-navigation';
-import symptomtracker from './symptomtracker'; 
-import {Root} from '../index.js';
+import { DrawerNavigator } from 'react-navigation';
+import symptomtracker from './symptomtracker';
+import { Root } from '../index.js';
 
-export default class LoginForm extends Component{ 
+export default class LoginForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            usertext: '', passtext: ''
+        };
+    }
     render() {
         return (
-            <View style={styles.container}> 
-            <TouchableOpacity onPress = {this.props.register}  style={styles.buttonContainer2}>
-                    <Text style={styles.buttonText2}>Create an Account</Text>    
-            </TouchableOpacity>
-            <StatusBar 
-              barStyle="light-content"
-              backgroundColor="blue"
-              />
-                <TextInput style={styles.input}
-                placeholder="Username" 
-                placeholderTextColor="rgba(255,255,255,0.7)"
-                returnKeyType="next"
-                onSubmitEditing={() => this.passwordInput.focus()}
-                
+            <View style={styles.container}>
+                <TouchableOpacity onPress={this.props.register} style={styles.buttonContainer2}>
+                    <Text style={styles.buttonText2}>Create a Account</Text>
+                </TouchableOpacity>
+                <StatusBar
+                    barStyle="light-content"
+                    backgroundColor="blue"
                 />
                 <TextInput style={styles.input}
-                placeholder="Password"
-                placeholderTextColor="rgba(255,255,255,0.7)"
-                returnKeyType="go"
-                secureTextEntry          
-                ref={(input) => this.passwordInput = input}
+                    placeholder="Username"
+                    placeholderTextColor="rgba(255,255,255,0.7)"
+                    returnKeyType="next"
+                    onSubmitEditing={() => this.passwordInput.focus()}
+                    onChangeText={(usertext) => this.setState({ usertext })}
                 />
-                <TouchableOpacity onPress = {this.props.onPress}  style={styles.buttonContainer}>
+                <TextInput style={styles.input}
+                    placeholder="Password"
+                    placeholderTextColor="rgba(255,255,255,0.7)"
+                    returnKeyType="go"
+                    secureTextEntry
+                    onChangeText={(passtext) => this.setState({ passtext })}
+                />
+                <TouchableOpacity onPress={this.handlePress} style={styles.buttonContainer}>
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
             </View>
         );
+    }
+    handlePress = () => {
+        const { usertext, passtext } = this.state
+        this.props.onPress(usertext, passtext);
     }
 }
 
@@ -43,23 +53,23 @@ const styles = StyleSheet.create({
         padding: 20
     },
     input: {
-        height: 40, 
+        height: 40,
         width: 250,
         backgroundColor: '#b0c4de',
-        marginBottom: 10, 
+        marginBottom: 18,
         color: '#000000',
         paddingHorizontal: 10,
     },
     buttonContainer: {
-        backgroundColor: '#2980b9', 
+        backgroundColor: '#2980b9',
         paddingVertical: 10,
         marginBottom: 14,
-    }, 
+    },
 
     buttonContainer2: {
         backgroundColor: '#2FD6D6',
-        paddingVertical: 10, 
-        marginBottom: 25,
+        paddingVertical: 10,
+        marginBottom: 30,
     },
     buttonText: {
         textAlign: 'center',
@@ -69,9 +79,9 @@ const styles = StyleSheet.create({
 
     },
     buttonText2: {
-        textAlign: 'center', 
-        color: '#FFFFFF', 
-        fontWeight: '500', 
+        textAlign: 'center',
+        color: '#FFFFFF',
+        fontWeight: '500',
         fontSize: 16,
     }
 
