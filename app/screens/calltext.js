@@ -33,10 +33,10 @@ export default class CallText extends Component {
         /> */}
         <View style={{backgroundColor:'#87cefa'}}>
         <Text style={{paddingTop:40, fontSize: 20, textAlign: 'center'}}>Emergency Contact</Text>
-        <Button
+        {/* <Button
           onPress={() => Linking.openURL('http://ec2-34-213-32-154.us-west-2.compute.amazonaws.com/')}
           title="Server"
-        />
+        /> */}
          </View>
           <View style={styles.formContainer}>
             <TouchableOpacity style={styles.buttonContainer}>

@@ -13,69 +13,113 @@ import {
 import AutoGrowingTextInput from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 
+async function dailyReport(createdOn, chestPain, breathingDifficulty, stressLevel, tiredness) {
+  try {
+    const response = await fetch('http://ec2-34-213-32-154.us-west-2.compute.amazonaws.com/api/dailyReport', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        createdOn: createdOn,
+        chestPain: chestPain,
+        breathingDifficulty: breathingDifficulty,
+        stressLevel: stressLevel,
+        tiredness: tiredness,
+      })
+    });
+    return response.json();
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export default class SymptomTracker extends React.Component {
   static navigationOptions = {
     title: 'Symptom Tracker',
     tabBarIcon: ({ tintColor }) => (<Entypo name='text-document' size={20} style={styles.icon} />)
   };
+
+  state = {
+    submitted: null,
+    chestPain: .5,
+    breathingDifficulty: .5,
+    stressLevel: .5,
+    tiredness: .5,
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     const now = new Date();
+    now.setUTCHours(0, 0, 0, 0); //make time consistent, only use date portion (year, month, day)
     const day = now.getDate();
     const month = now.getMonth() + 1;
     const year = now.getFullYear();
-    //{new Date().toString()}
+    //{new Date().toString()} 
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Daily Symptom Tracker: {month}/{day}/{year}
         </Text>
+        <Text style={styles.welcome2}>
+          Submitted: {this.state.submitted ? 'yes' : 'no'}
+        </Text>
         <SymptomSlider
           title="Chest Pain"
+          value={this.state.chestPain}
+          onValueChange={(value) => this.setState({ chestPain: value })}
         />
         <SymptomSlider
           title="Breathing Difficulty"
+          value={this.state.breathingDifficulty}
+          onValueChange={(value) => this.setState({ breathingDifficulty: value })}
         />
         <SymptomSlider
           title="Stress/Anxiety Level"
+          value={this.state.stressLevel}
+          onValueChange={(value) => this.setState({ stressLevel: value })}
         />
         <SymptomSlider
           title="Tiredness"
+          value={this.state.tiredness}
+          onValueChange={(value) => this.setState({ tiredness: value })}
         />
         <Button
-          // onPress={onPress} 
+          onPress={this.handlePress}
           title="Submit"
           color="#1382DE"
           accessibilityLabel="Submit your daily symptom report to the database."
         />
       </View>
     );
+    
+  }
+  handlePress = async () => {
+    try {
+      const createdOn = new Date();
+      createdOn.setUTCHours(0, 0, 0, 0); // make time consistent, only use date portion (year, month, day)
+
+      const { chestPain, breathingDifficulty, stressLevel, tiredness } = this.state
+
+      const result = await dailyReport(createdOn, chestPain, breathingDifficulty, stressLevel, tiredness)
+      this.setState({ submitted: true })
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
 }
 
 class SymptomSlider extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: .5,
-    };
-  }
-  handleValueChange = (value) => {
-    this.setState({
-      value: value,
-    });
-  }
   render() {
     return (
       <View style={styles.slider}>
         <Text style={styles.clearbutton}>{this.props.title}</Text>
         <Slider
           style={styles.slider}
-          value={this.state.value}
-          onValueChange={this.handleValueChange}
-          minimumTrackTintColor={this.colorChange(this.state.value)}
+          value={this.props.value}
+          onValueChange={this.props.onValueChange}
+          minimumTrackTintColor={this.colorChange(this.props.value)}
         />
-        <Text style={styles.slider}>Value: {parseInt(this.state.value * 10)}</Text>
+        <Text style={styles.slider}>Value: {parseInt(this.props.value * 10)}</Text>
       </View>
     );
   }
@@ -116,7 +160,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 1,
     fontWeight: 'bold',
-    padding: 22,
+    padding: 10,
+  },
+  welcome2: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 1,
+    fontWeight: 'bold',
+    padding: 8,
+    color: '#2E86C1',
   },
   symptoms: {
     fontSize: 17,
@@ -134,11 +186,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 2,
     borderBottomWidth: 0,
-    backgroundColor: '#5DADE2',
+    backgroundColor: '#B8E2F9',
     paddingTop: 4,
-    color: '#FFFFFF',
-    fontSize: 15,
-    fontWeight: '400',
   },
   input: {
     height: 60,

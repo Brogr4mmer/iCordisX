@@ -16,7 +16,7 @@ export default class LoginForm extends Component {
         return (
             <View style={styles.container}>
                 <TouchableOpacity onPress={this.props.register} style={styles.buttonContainer2}>
-                    <Text style={styles.buttonText2}>Create a Account</Text>
+                    <Text style={styles.buttonText2}>Create Account</Text>
                 </TouchableOpacity>
                 <StatusBar
                     barStyle="light-content"

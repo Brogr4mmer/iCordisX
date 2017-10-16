@@ -6,7 +6,7 @@ import loginsecured from './screens/loginsecured';
 import userdata from './screens/userdata';
 import datadisplay from './screens/datadisplay';
 import { StackNavigator } from 'react-navigation';
-//import location from './screens/location';
+import location from './screens/location';
 import calltext from './screens/calltext';
 import journal from './screens/journal';
 import PropTypes from 'prop-types'
@@ -18,7 +18,7 @@ const Drawer = DrawerNavigator({
 })
 
 const DrawerTwo = DrawerNavigator({
-  //location: { screen: location },
+  location: { screen: location },
   callText: { screen: calltext }, 
 })
 

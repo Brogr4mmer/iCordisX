@@ -12,10 +12,22 @@
 		"react-dom": "^15.6.1",
 		"react-native": "^0.47.1",
 		"react-native-auto-expanding-textinput": "0.0.5",
+		"react-native-ble-plx": "^0.6.1",
 		"react-native-button": "^2.1.0",
+		"react-native-chart": "^1.0.8-beta",
+		"react-native-datepicker": "^1.6.0",
+		"react-native-dropdown": "0.0.6",
+		"react-native-form-generator": "^0.9.9",
+		"react-native-maps": "^0.16.0",
+		"react-native-pathjs-charts": "0.0.30",
+		"react-native-picker": "^4.2.0",
+		"react-native-radio-buttons": "^1.0.0",
 		"react-native-router-flux": "^4.0.0-beta.16",
+		"react-native-simple-radio-button": "^2.6.2",
+		"react-native-svg": "^5.4.1",
 		"react-native-vector-icons": "^4.3.0",
-		"react-navigation": "^1.0.0-beta.11"
+		"react-navigation": "^1.0.0-beta.11",
+		"victory-native": "^0.14.0"
 	},
 	"devDependencies": {
 		"babel-jest": "20.0.3",
