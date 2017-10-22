@@ -1,45 +1,45 @@
-import { TabNavigator } from 'react-navigation';
-import {DrawerNavigator} from'react-navigation';
-import symptomtracker from './screens/symptomtracker'; 
+import { TabNavigator, DrawerNavigator, StackNavigator } from 'react-navigation';
+
+import symptomtracker from './screens/symptomtracker';
 import loginscreen from './screens/loginscreen';
 import loginsecured from './screens/loginsecured';
 import userdata from './screens/userdata';
 import datadisplay from './screens/datadisplay';
-import { StackNavigator } from 'react-navigation';
 import location from './screens/location';
 import calltext from './screens/calltext';
 import journal from './screens/journal';
-import PropTypes from 'prop-types'
+import createaccount from './screens/createaccount';
 
 
-const Drawer = DrawerNavigator({
-  loginscreen: {screen: loginscreen},
-  userdata: {screen: userdata},
+const LoginStack = StackNavigator({
+    loginscreen: { screen: loginscreen },
+    loginsecured: { screen: loginsecured },
+    createaccount: { screen: createaccount },
 })
 
-const DrawerTwo = DrawerNavigator({
-  location: { screen: location },
-  callText: { screen: calltext }, 
+const LoginDrawer = DrawerNavigator({
+    loginscreen: { screen: LoginStack },
+    userdata: { screen: userdata },
 })
 
-const DrawerThree = DrawerNavigator({
-    symptomTracker: {screen: symptomtracker},
+const EmergencyDrawer = DrawerNavigator({
+    location: { screen: location },
+    callText: { screen: calltext },
+})
+
+const TrackerDrawer = DrawerNavigator({
+    symptomTracker: { screen: symptomtracker },
     journal: { screen: journal },
 })
 
 export const Root = TabNavigator(
     {
-        LoginScreen: {screen: Drawer},
-        SymptomTracker: { screen: DrawerThree },
-        DataDisplay: { screen: datadisplay},
-        Emergency: { screen: DrawerTwo },
+        LoginScreen: { screen: LoginDrawer },
+        SymptomTracker: { screen: TrackerDrawer },
+        DataDisplay: { screen: datadisplay },
+        Emergency: { screen: EmergencyDrawer },
     },
     {
         initialRouteName: "LoginScreen",
     }
-); 
-
-export const Toot = StackNavigator({
-    LoginScreen: { screen: loginscreen },
-    SymptomTracker: { screen: symptomtracker}, 
-})
+);

@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import { DrawerNavigator } from 'react-navigation';
 import symptomtracker from './symptomtracker';
 import { Root } from '../index.js';
+import loginscreen from './loginscreen';
 
 export default class LoginForm extends Component {
     constructor(props) {
@@ -42,9 +43,33 @@ export default class LoginForm extends Component {
             </View>
         );
     }
-    handlePress = () => {
+    handlePress = async () => {
         const { usertext, passtext } = this.state
-        this.props.onPress(usertext, passtext);
+        if (usertext && passtext) {
+            try {
+                const result = await fetch('https://cordisx.com/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: usertext,
+                        password: passtext,
+                    })
+                })
+                const body = await result.json()
+                console.log(result, body)
+                //const body = await result.text()
+                //console.log(body)
+                if (body.success === true) {
+                    this.props.onPress(usertext, passtext);
+                }
+            }
+            catch (error) {
+                console.log(error)
+            }
+
+        }
     }
 }
 

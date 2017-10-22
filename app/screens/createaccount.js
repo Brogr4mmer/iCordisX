@@ -22,6 +22,7 @@ import { post } from '../api';
 import { get } from '../api';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import DatePicker from 'react-native-datepicker';
+import { NavigationActions } from 'react-navigation';
 
 var radio_props = [
   { label: 'Male     ', value: 0 },
@@ -42,7 +43,6 @@ class CreateAccount extends Component {
     };
   }
   render() {
-    const { navigate } = this.props.navigation;
     console.log(this.state)
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -119,7 +119,6 @@ class CreateAccount extends Component {
               onChangeText={(passtext) => this.setState({ passtext })}
             />
             <Button
-              // onPress={onPress} 
               title="Submit"
               color="#1382DE"
               accessibilityLabel="Create Account"
@@ -131,6 +130,16 @@ class CreateAccount extends Component {
     );
   }
   handlePress = async () => {
+
+    const { dispatch } = this.props.navigation;
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions:
+      [
+        NavigationActions.navigate({ routeName: 'loginsecured' })
+      ]
+    })
+
     try {
       const result = await fetch('https://cordisx.com/api/user', {
         method: 'POST',
@@ -149,7 +158,7 @@ class CreateAccount extends Component {
       console.log(result)
       const body = await result.text()
       console.log(body)
-      this.props.navigation.navigate('loginsecured')
+      dispatch(resetAction)
     }
     catch (error) {
       console.log(error)

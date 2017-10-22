@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   clearbutton: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#FFFFFF'
+    color: '#353A3D'
   },
   slider: {
     marginLeft: 5,
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 2,
     borderBottomWidth: 0,
-    backgroundColor: '#B8E2F9',
+    backgroundColor: '#9CD7F7',
     paddingTop: 4,
   },
   input: {

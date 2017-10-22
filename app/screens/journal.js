@@ -46,16 +46,25 @@ export default class Journal extends React.Component {
                         minHeight={60}
                         ref={(r) => { this.input = r; }}
                     />
-                    <TouchableOpacity style={styles.button} onPress={() => this.resetTextInput()}>
-                        <Text style={styles.symptoms}>Clear Text</Text>
-                    </TouchableOpacity>
                 </View>
-                <Button
-                        // onPress={onPress} 
-                        title="Submit"
-                        color="#1382DE"
-                        accessibilityLabel="Submit your daily symptom report to the database."
-                    />
+                <View style = {styles.view}> 
+                <Button 
+                    // onPress={onPress} 
+                    onPress={() => this.resetTextInput()}
+                    title="Clear Text"
+                    color="#1382DE"
+                    backgroundColor="#A6ACAF"
+                    accessibilityLabel="Clear text."
+                />
+                </View> 
+                <View style = {styles.view1}>
+                <Button 
+                    // onPress={onPress} 
+                    title="Submit"
+                    color="#1382DE"
+                    accessibilityLabel="Submit your daily symptom report to the database."
+                />
+                </View>
             </View>
         );
     }
@@ -77,10 +86,8 @@ const styles = StyleSheet.create({
     inputcontainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#76c6ff',
-        paddingLeft: 20,
-        paddingRight: 0,
-        marginTop: 4,
+        backgroundColor: '#000407',
+        padding: 10,
     },
     welcome: {
         fontSize: 20,
@@ -112,14 +119,11 @@ const styles = StyleSheet.create({
         fontWeight: '400',
     },
     input: {
-        height: 150,
+        height: 600,
         width: 400,
-        marginBottom: 28,
-        color: '#1D9AE1',
-        paddingHorizontal: 20,
+        color: '#000407',
         borderBottomColor: '#000000',
         backgroundColor: '#DBE9F1',
-        borderBottomWidth: 0,
         paddingLeft: 20,
         fontSize: 17,
         flex: 1,
@@ -128,7 +132,16 @@ const styles = StyleSheet.create({
     icon: {
         height: 22,
         width: 20,
+    },
+    view: {
+        backgroundColor: "#D0D3D4",
+        borderBottomColor: '#17202A',
+        borderBottomWidth: 1
+    },
+    view1: {
+        backgroundColor: "#CACFD2",
+        borderBottomColor: '#17202A',
+        borderBottomWidth: 1
     }
-
 
 });
