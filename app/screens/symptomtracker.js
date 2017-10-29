@@ -63,22 +63,22 @@ export default class SymptomTracker extends React.Component {
           Submitted: {this.state.submitted ? 'yes' : 'no'}
         </Text>
         <SymptomSlider
-          title="Chest Pain"
+          title="  Chest Pain"
           value={this.state.chestPain}
           onValueChange={(value) => this.setState({ chestPain: value })}
         />
         <SymptomSlider
-          title="Breathing Difficulty"
+          title="  Breathing Difficulty"
           value={this.state.breathingDifficulty}
           onValueChange={(value) => this.setState({ breathingDifficulty: value })}
         />
         <SymptomSlider
-          title="Stress/Anxiety Level"
+          title="  Stress/Anxiety Level"
           value={this.state.stressLevel}
           onValueChange={(value) => this.setState({ stressLevel: value })}
         />
         <SymptomSlider
-          title="Tiredness"
+          title="  Tiredness"
           value={this.state.tiredness}
           onValueChange={(value) => this.setState({ tiredness: value })}
         />
@@ -111,7 +111,7 @@ export default class SymptomTracker extends React.Component {
 class SymptomSlider extends Component {
   render() {
     return (
-      <View style={styles.slider}>
+      <View style={styles.slider1}>
         <Text style={styles.clearbutton}>{this.props.title}</Text>
         <Slider
           style={styles.slider}
@@ -119,7 +119,7 @@ class SymptomSlider extends Component {
           onValueChange={this.props.onValueChange}
           minimumTrackTintColor={this.colorChange(this.props.value)}
         />
-        <Text style={styles.slider}>Value: {parseInt(this.props.value * 10)}</Text>
+        <Text style = {styles.clearbutton1}> Value: {parseInt(this.props.value * 10)}</Text>
       </View>
     );
   }
@@ -176,9 +176,14 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   clearbutton: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#353A3D'
+    fontSize: 14.5,
+    fontWeight: 'bold',
+    color: '#FFFFFF'
+  },
+  clearbutton1: {
+    fontSize: 14.5,
+    fontWeight: '400',
+    color: '#FFFFFF'
   },
   slider: {
     marginLeft: 5,
@@ -186,8 +191,23 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 2,
     borderBottomWidth: 0,
-    backgroundColor: '#9CD7F7',
+    backgroundColor: '#CEF1F9', 
     paddingTop: 4,
+    borderRadius: 2, 
+    borderWidth: 2,
+    borderColor: '#FFFFFF'
+  },
+  slider1: {
+    marginLeft: 5,
+    marginRight: 5,
+    marginBottom: 10,
+    marginTop: 2,
+    borderBottomWidth: 0,
+    backgroundColor: '#2980b9',
+    paddingTop: 4,
+    borderRadius: 2, 
+    borderWidth: 1,
+    borderColor: '#FFFFFF'
   },
   input: {
     height: 60,

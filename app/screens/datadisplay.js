@@ -14,7 +14,7 @@ import { VictoryTheme } from "victory-native";
 import { VictoryAxis } from "victory-native";
 import { VictoryLabel } from "victory-native";
 import { BleManager } from 'react-native-ble-plx';
-import TimeLabel from '../components/TimeLabel'
+import TimeLabel from '../components/TimeLabel';
 
 //shift alt F to beautify
 export default class DataDisplay extends Component {
@@ -28,9 +28,47 @@ export default class DataDisplay extends Component {
     this.state = {
       data: []
     }
-    //this.manager = new BleManager()
+    this.manager = new BleManager()
   }
-  
+  /*componentWillMount() {
+    console.log('mounted')
+    const subscription = this.manager.onStateChange((state) => {
+      console.log('BleManager state change', state)
+      if (state === 'PoweredOn') {
+        this.scanAndConnect();
+        subscription.remove();
+      }
+    }, true);
+  }
+  scanAndConnect() {
+    this.manager.startDeviceScan(null, null, (error, device) => {
+      if (error) {
+        console.log(error);
+        return
+      }
+
+      console.log('Initially', device.name)
+
+      /*
+
+      device.connect()
+        .then((device) => {
+          return device.discoverAllServicesAndCharacteristics()
+        })
+        .then((device) => {
+          return device.services()
+        })
+        .then((services) => {
+          console.log(services)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+        
+      
+    })
+  }
+*/
   componentDidMount() {
     setInterval(() => {
       const now = new Date();
@@ -44,52 +82,10 @@ export default class DataDisplay extends Component {
     }, 250)
   }
 
- /*
-  componentWillMount() {
-    const subscription = this.manager.onStateChange((state) => {
-      if (state === 'PoweredOn') {
-        this.scanAndConnect();
-        subscription.remove();
-      }
-    }, true);
+  handlePress = () => {
+    this.scanAndConnect();
   }
-  handlePress = async () => {
-    try {
-      device.connect()
-      .then((device) => {
-          return device.discoverAllServicesAndCharacteristics()
-      })
-      .then((device) => {
-         // Do work on device with services and characteristics
-      })
-      .catch((error) => {
-          // Handle errors
-      });
-    }
-    catch(error) {
-      console.log(error)
-    }
-  }
-  scanAndConnect() {
-    this.manager.startDeviceScan(null, null, (error, device) => {
-      if (error) {
-        // Handle error (scanning will be stopped automatically)
-        return
-      }
 
-      // Check if it is a device you are looking for based on advertisement data
-      // or other criteria.
-      if (device.name === 'TI BLE Sensor Tag' ||
-        device.name === 'SensorTag') {
-
-        // Stop scanning as it's not necessary if you are scanning for one device.
-        this.manager.stopDeviceScan();
-
-        // Proceed with connection.
-      }
-    });
-  }
-  */
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -109,7 +105,7 @@ export default class DataDisplay extends Component {
               style={{ axisLabel: { padding: 40 } }} />
             <VictoryAxis
               label="Time(ms)"
-             // axisLabelComponent={TimeLabel}
+              // axisLabelComponent={TimeLabel}
               style={{ parent: { border: "2px solid #ccc" } }}
             />
             <VictoryLine
@@ -134,8 +130,9 @@ export default class DataDisplay extends Component {
         </View>
       </View>
     );
+
   }
-  
+
 }
 
 const styles = StyleSheet.create({

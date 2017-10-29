@@ -20,10 +20,10 @@ export default class Location extends Component {
     <MapView
       style = {styles.map}
       initialRegion={{
-        latitude: 37.7882,
-        longitude: -122.4324,
+        latitude: 33.6645854,
+        longitude: -117.81885789999998,
         latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        longitudeDelta: 0.0521, //.0421
       }}
     /> 
     );

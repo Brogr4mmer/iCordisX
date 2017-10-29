@@ -38,6 +38,8 @@ class CreateAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      firstname: '',
+      lastname: '',
       usertext: '',
       passtext: '',
     };
@@ -55,15 +57,15 @@ class CreateAccount extends Component {
             <TextInput style={styles.input}
               placeholder="First Name"
               placeholderTextColor="rgba(255,255,255,0.7)"
-              returnKeyType="next"
-              //value={this.state.usertext}
-              onSubmitEditing={() => this.passwordInput.focus()} />
+              returnKeyType="go"
+              value={this.state.firstname}
+              onChangeText={(firstname) => this.setState({ firstname })} />
             <TextInput style={styles.input}
               placeholder="Last Name"
               placeholderTextColor="rgba(255,255,255,0.7)"
-              returnKeyType="next"
-              //value={this.state.usertext}
-              onSubmitEditing={() => this.passwordInput.focus()} />
+              returnKeyType="go"
+              value={this.state.lastname}
+              onChangeText={(lastname) => this.setState({ lastname })} />
             <DatePicker style={styles.birthday}
               style={{ width: 200 }}
               date={this.state.date}
@@ -94,7 +96,7 @@ class CreateAccount extends Component {
                 initial={0}
                 onPress={(value) => { this.setState({ value: value }) }}
                 formHorizontal={true}
-                labelHoritonztal={true}
+                labelHorizontal={true}
                 animation={true}
                 buttonSize={20}
                 buttonWrapStyle={{ marginLeft: 40 }}
@@ -129,6 +131,12 @@ class CreateAccount extends Component {
       </KeyboardAvoidingView>
     );
   }
+  checkEmpty = () => {
+      if (value.equals("")) {
+
+      }
+  }
+
   handlePress = async () => {
 
     const { dispatch } = this.props.navigation;
